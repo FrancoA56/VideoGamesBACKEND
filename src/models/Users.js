@@ -3,43 +3,31 @@ const { DataTypes } = require("sequelize");
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("videogame", {
+  sequelize.define("User", {
     ID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    Name: {
+    UserName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-    Description: {
+    Email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
-    background_image: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    release: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    rating: {
+    Password: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    esrb_rating: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    rating_top: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    owned: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      validate: {
+        is: /^(?=.*\d).{6,10}$/,
+      },
     },
   });
 };

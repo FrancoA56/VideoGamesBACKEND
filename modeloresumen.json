@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "id": "numero id",
+      "name": "nombre",
+      "released": "fecha de salida",
+      "background_image": "url con la imagen principal",
+      "rating": "rating en decimal",
+      "rating_top": "rating redondeado para tarjetas",
+      "playtime": "cant de hs de juego",
+      "added_by_status": {
+        "owned": "compras totales del juego"
+      },
+      "platforms": [
+        {
+          "platform": {
+            "name": "nombre de consola en la que jugar el juego"
+          }
+        }
+      ],
+      "genres": [
+        {
+            "name": "nombre del genero del juego"
+        }
+      ],
+      "tags": [
+        {
+            "name": "nombre del tipo de juego (singleplayer, rpg)"
+        }
+      ],
+      "esrb_rating": {
+        "name": "nombre del tipo de juego (mature)"
+      }
+    }
+  ]
+}
