@@ -9,12 +9,12 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    UserName: {
+    user: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    Email: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -22,8 +22,8 @@ module.exports = (sequelize) => {
         isEmail: true,
       },
     },
-    Password: {
-      type: DataTypes.INTEGER,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         is: /^(?=.*\d).{6,10}$/,
