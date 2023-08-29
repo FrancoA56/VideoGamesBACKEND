@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const axios = require("axios");
 
 const { API_KEY } = process.env;
@@ -6,11 +6,12 @@ const { API_KEY } = process.env;
 const URL = "https://api.rawg.io/api/games/";
 
 const getGameById = async (req, res) => {
-  const id = req.params.id;
+  const ID = req.params.id;
 
   try {
-    const { data } = await axios(`${URL}${id}?key=${API_KEY}`);
+    const { data } = await axios(`${URL}${ID}?key=${API_KEY}`);
     const {
+      id,
       name,
       released,
       background_image,
@@ -18,11 +19,15 @@ const getGameById = async (req, res) => {
       rating_top,
       playtime,
       added_by_status: { owned },
+      esrb_rating: { name: esrb_rating },
       platforms,
       genres,
       tags,
-      esrb_rating: { name: esrb_rating },
     } = data;
+    const platformNames = platforms.map((platform) => platform.platform.name);
+    const genreNames = genres.map((genre) => genre.name);
+    const tagNames = tags.map((tag) => tag.name);
+
     const game = {
       id,
       name,
@@ -32,10 +37,10 @@ const getGameById = async (req, res) => {
       rating_top,
       playtime,
       owned,
-      platforms,
-      genres,
-      tags,
       esrb_rating,
+      platforms: platformNames,
+      genres: genreNames,
+      tags: tagNames,
     };
 
     return name

@@ -7,11 +7,11 @@ const URL = "https://api.rawg.io/api/games";
 
 const getGameByName = async (req, res) => {
   const SLUG = req.params.slug;
-
+  const formattedSlug = SLUG.replace(/-/g, ' ').toLowerCase();
   try {
     const { data } = await axios(`${URL}?key=${API_KEY}`);
 
-    const findGames = data.results.filter((game) => game.slug.includes(SLUG));
+    const findGames = data.results.filter((game) => game.slug.includes(formattedSlug));
 
     const gamesToSave = findGames.map(
       ({
@@ -54,7 +54,7 @@ const getGameByName = async (req, res) => {
     const savedGames = await Promise.all(
       gamesToSave.map(async (game) => {
         const [existingGame, created] = await Videogame.findOrCreate({
-          where: { ID: game.id }, 
+          where: { id: game.id }, 
           defaults: game 
         });
     
