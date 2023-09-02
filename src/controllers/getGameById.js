@@ -25,8 +25,11 @@ const getGameById = async (req, res) => {
       tags,
     } = data;
     const platformNames = platforms.map((platform) => platform.platform.name);
+    const modifiedPlatformNames = platformNames.join(', ');
     const genreNames = genres.map((genre) => genre.name);
+    const modifiedGenreNames = genreNames.join(', ');
     const tagNames = tags.map((tag) => tag.name);
+    const modifiedTagName = tagNames.join(', ');
 
     const game = {
       id,
@@ -38,9 +41,9 @@ const getGameById = async (req, res) => {
       playtime,
       owned,
       esrb_rating,
-      platforms: platformNames,
-      genres: genreNames,
-      tags: tagNames,
+      platforms: modifiedPlatformNames,
+      genres: modifiedGenreNames,
+      tags: modifiedTagName,
     };
 
     return name

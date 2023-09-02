@@ -41,6 +41,8 @@ const { Videogame, User, Genres } = database.models;
 
 Videogame.belongsToMany(Genres, { through: "genres_videogame" });
 Genres.belongsToMany(Videogame, { through: "genres_videogame" });
+User.belongsToMany(Videogame, { through: "user_videogame"});
+Videogame.belongsToMany(User, { through: "user_videogame"});
 
 module.exports = {
   ...database.models,
