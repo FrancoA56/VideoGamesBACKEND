@@ -7,11 +7,13 @@ const URL = "https://api.rawg.io/api/games";
 
 const getGameByName = async (req, res) => {
   const SLUG = req.params.slug;
-  const formattedSlug = SLUG.replace(/-/g, ' ').toLowerCase();
+  const formattedSlug = SLUG.replace(/ /g, "-").toLowerCase();
   try {
     const { data } = await axios(`${URL}?key=${API_KEY}`);
 
-    const findGames = data.results.filter((game) => game.slug.includes(formattedSlug));
+    const findGames = data.results.filter((game) =>
+      game.slug.includes(formattedSlug)
+    );
 
     const gamesToSave = findGames.map(
       ({
@@ -24,16 +26,16 @@ const getGameByName = async (req, res) => {
         playtime,
         added_by_status: { owned },
         esrb_rating: { name: esrb_rating },
-        platforms,
         genres,
+        platforms,
         tags,
       }) => {
         const platformNames = platforms.map(
           (platform) => platform.platform.name
         );
-        const genreNames = genres.map((genre) => genre.name);
+        const genreIds = genres.map((genre) => genre.id);
         const tagNames = tags.map((tag) => tag.name);
-        
+
         return {
           id,
           name,
@@ -44,8 +46,8 @@ const getGameByName = async (req, res) => {
           playtime,
           owned,
           esrb_rating,
+          genreIds,
           platforms: platformNames,
-          genres: genreNames,
           tags: tagNames,
         };
       }
@@ -54,14 +56,16 @@ const getGameByName = async (req, res) => {
     const savedGames = await Promise.all(
       gamesToSave.map(async (game) => {
         const [existingGame, created] = await Videogame.findOrCreate({
-          where: { id: game.id }, 
-          defaults: game 
+          where: { id: game.id },
+          defaults: game,
         });
-    
+
         if (!created) {
           return existingGame;
         }
-    
+
+        existingGame.addGenres(game.genreIds);
+
         return existingGame;
       })
     );
