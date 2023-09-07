@@ -7,7 +7,7 @@ const createGame = async (req, res) => {
     rating_top,
     playtime,
     esrb_rating,
-    genres,
+    genreIds,
     background_image,
   } = req.body;
 
@@ -18,15 +18,26 @@ const createGame = async (req, res) => {
       !rating_top ||
       !playtime ||
       !esrb_rating ||
-      !genres ||
+      !genreIds ||
       !background_image
     ) {
       return res.status(400).json({ error: "Missing data" });
     }
-
     const getRandomInt = (max = 100) => {
       return Math.floor(Math.random() * max);
     };
+    const gameForRedux = {
+      id: getRandomInt(),
+      name,
+      released,
+      rating: rating_top,
+      rating_top,
+      playtime,
+      esrb_rating,
+      genreIds,
+      background_image,
+    }
+ 
     const game = await Videogame.create({
       id: getRandomInt(),
       name,
@@ -38,88 +49,10 @@ const createGame = async (req, res) => {
       background_image,
     });
 
-    // ...
 
-    const lowerGenres = genres.toLowerCase();
+    game.addGenres(genreIds);
 
-    switch (lowerGenres) {
-      case "action":
-        game.addGenres(4);
-        break;
-
-      case "indie":
-        game.addGenres(51);
-        break;
-
-      case "adventure":
-        game.addGenres(3);
-        break;
-
-      case "rpg":
-        game.addGenres(5);
-        break;
-
-      case "strategy":
-        game.addGenres(10);
-        break;
-
-      case "shooter":
-        game.addGenres(2);
-        break;
-
-      case "casual":
-        game.addGenres(40);
-        break;
-
-      case "simulation":
-        game.addGenres(14);
-        break;
-
-      case "puzzle":
-        game.addGenres(7);
-        break;
-
-      case "arcade":
-        game.addGenres(11);
-        break;
-
-      case "platformer":
-        game.addGenres(83);
-        break;
-
-      case "racing":
-        game.addGenres(1);
-        break;
-
-      case "sports":
-        game.addGenres(15);
-        break;
-
-      case "fighting":
-        game.addGenres(6);
-        break;
-
-      case "family":
-        game.addGenres(19);
-        break;
-
-      case "board":
-        game.addGenres(28);
-        break;
-
-      case "educational":
-        game.addGenres(34);
-        break;
-
-      case "card":
-        game.addGenres(17);
-        break;
-
-      default:
-        break;
-    }
-
-    res.status(201).json(game);
+    res.status(201).json(gameForRedux);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
