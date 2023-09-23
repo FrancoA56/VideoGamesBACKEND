@@ -1,8 +1,8 @@
 <h1 align="center">BACK END app --> Videogames.</h1>
 
-<h4>Una SPA que consume datos de una API externa, y permite la visualización de información general y detallada de más de 500,000 videojuegos, entre las funcionalidades que dispone esta APP está el filtrar y ordenar videojuegos por diferentes variables como género, plataformas, nombre, calificación, además de la creación de nuevos videojuegos, mediante un formulario controlado.</h4>
+<h3>Una SPA que consume datos de una API externa, y permite la visualización de información general y detallada de más de 500,000 videojuegos, entre las funcionalidades que dispone esta APP está el filtrar y ordenar videojuegos por diferentes variables como género, plataformas, nombre, calificación, además de la creación de nuevos videojuegos, mediante un formulario controlado.</h3>
 
-<h4>Para iniciar el servidor es necesario instalar las dependencias (npm install), completar el archivo .env, crear una base de datos de postgreSQL que se llame videogames, luego levantar la aplicacion (npm start) y hacer una peticion del tipo GET a través de Insomnia o Postman. Recuerda que este es solo el servidor, el cliente esta en el repositorio VideoGamesFRONTEND</h4>
+<h3>Para iniciar el servidor es necesario instalar las dependencias (npm install), completar el archivo .env, crear una base de datos de postgreSQL que se llame videogames, luego levantar la aplicacion (npm start) y hacer una peticion del tipo GET a través de Insomnia o Postman. Recuerda que este es solo el servidor, el cliente esta en el repositorio VideoGamesFRONTEND</h3>
 
 <h4>Para realizar la peticion GET puedes seguir los siguientes pasos:</h4> 
 
