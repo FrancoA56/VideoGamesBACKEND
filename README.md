@@ -6,7 +6,7 @@
 
 <h4>Para realizar la peticion GET puedes seguir los siguientes pasos:</h4> 
 
-<h5>Crea una peticion del tipo GET al [PORT=3001]</h5>
+<h5>Crea una peticion del tipo GET al [PORT=3001]</h5> 
 <h5>En la URL ingresa: http://localhost:3001/genres</h5>
 <h5>Enviala, una vez la peticion se haya creado exitosamente (200) ya puedes levantar el Front y utilizar la APP a gusto!</h5>
 
